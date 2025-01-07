@@ -124,4 +124,19 @@ class UserController extends Controller
             \Log::error($e->getMessage().' '.$e->getFile().' '.$e->getLine());
         }
     }
+
+    public function getAllTimeZone(){
+        foreach (timezone_identifiers_list() as $timezoneValue) {
+            $timezone = new DateTimeZone($timezoneValue);
+            $locationInfo = $timezone->getLocation();
+            echo "<pre>";
+            echo "Timezone: $timezoneValue\n";
+            echo "Country Code: {$locationInfo['country_code']}\n";
+            echo "Latitude: {$locationInfo['latitude']}\n";
+            echo "Longitude: {$locationInfo['longitude']}\n";
+            echo "Comments: {$locationInfo['comments']}\n";
+            echo "\n"; // Add a newline for better readability
+        }
+    }
+
 }
